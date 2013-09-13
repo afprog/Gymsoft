@@ -19,6 +19,8 @@ public class Ejercicio implements Serializable {
 
 	private String ejercicio;
 
+	private String ejerciciocol;
+
 	//bi-directional many-to-one association to Rutina
 	@ManyToOne
 	private Rutina rutina;
@@ -44,6 +46,14 @@ public class Ejercicio implements Serializable {
 
 	public void setEjercicio(String ejercicio) {
 		this.ejercicio = ejercicio;
+	}
+
+	public String getEjerciciocol() {
+		return this.ejerciciocol;
+	}
+
+	public void setEjerciciocol(String ejerciciocol) {
+		this.ejerciciocol = ejerciciocol;
 	}
 
 	public Rutina getRutina() {

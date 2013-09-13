@@ -19,10 +19,11 @@ public class Actividad implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idActividad;
 
-	private String actividadcol;
-
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date fecha;
+
+	@Column(name="lugar_fisico")
+	private String lugarFisico;
 
 	private String tipo;
 
@@ -46,20 +47,20 @@ public class Actividad implements Serializable {
 		this.idActividad = idActividad;
 	}
 
-	public String getActividadcol() {
-		return this.actividadcol;
-	}
-
-	public void setActividadcol(String actividadcol) {
-		this.actividadcol = actividadcol;
-	}
-
 	public Date getFecha() {
 		return this.fecha;
 	}
 
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
+	}
+
+	public String getLugarFisico() {
+		return this.lugarFisico;
+	}
+
+	public void setLugarFisico(String lugarFisico) {
+		this.lugarFisico = lugarFisico;
 	}
 
 	public String getTipo() {

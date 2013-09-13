@@ -18,6 +18,8 @@ public class Objetivo implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idObjetivo;
 
+	private String descripcion;
+
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
 	private Usuario usuario;
@@ -35,6 +37,14 @@ public class Objetivo implements Serializable {
 
 	public void setIdObjetivo(int idObjetivo) {
 		this.idObjetivo = idObjetivo;
+	}
+
+	public String getDescripcion() {
+		return this.descripcion;
+	}
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
 	}
 
 	public Usuario getUsuario() {

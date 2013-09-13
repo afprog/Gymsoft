@@ -19,6 +19,9 @@ public class Pago implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int pago_id;
 
+	@Column(name="estado_pago")
+	private String estadoPago;
+
 	@Temporal(TemporalType.DATE)
 	private Date fecha;
 
@@ -37,6 +40,14 @@ public class Pago implements Serializable {
 
 	public void setPago_id(int pago_id) {
 		this.pago_id = pago_id;
+	}
+
+	public String getEstadoPago() {
+		return this.estadoPago;
+	}
+
+	public void setEstadoPago(String estadoPago) {
+		this.estadoPago = estadoPago;
 	}
 
 	public Date getFecha() {

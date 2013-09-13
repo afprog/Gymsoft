@@ -18,7 +18,9 @@ public class Categoria implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idCategoria;
 
-	private String categoria;
+	private String descripcion;
+
+	private String explicacion;
 
 	//bi-directional many-to-one association to Ejercicio
 	@OneToMany(mappedBy="categoria")
@@ -39,12 +41,20 @@ public class Categoria implements Serializable {
 		this.idCategoria = idCategoria;
 	}
 
-	public String getCategoria() {
-		return this.categoria;
+	public String getDescripcion() {
+		return this.descripcion;
 	}
 
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+	public String getExplicacion() {
+		return this.explicacion;
+	}
+
+	public void setExplicacion(String explicacion) {
+		this.explicacion = explicacion;
 	}
 
 	public List<Ejercicio> getEjercicios() {

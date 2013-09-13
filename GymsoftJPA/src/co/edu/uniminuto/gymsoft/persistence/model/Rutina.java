@@ -18,7 +18,13 @@ public class Rutina implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idRutina;
 
+	private String duracion;
+
 	private String nombre;
+
+	private String regularidad;
+
+	private String series;
 
 	//bi-directional many-to-one association to Ejercicio
 	@OneToMany(mappedBy="rutina")
@@ -39,12 +45,36 @@ public class Rutina implements Serializable {
 		this.idRutina = idRutina;
 	}
 
+	public String getDuracion() {
+		return this.duracion;
+	}
+
+	public void setDuracion(String duracion) {
+		this.duracion = duracion;
+	}
+
 	public String getNombre() {
 		return this.nombre;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getRegularidad() {
+		return this.regularidad;
+	}
+
+	public void setRegularidad(String regularidad) {
+		this.regularidad = regularidad;
+	}
+
+	public String getSeries() {
+		return this.series;
+	}
+
+	public void setSeries(String series) {
+		this.series = series;
 	}
 
 	public List<Ejercicio> getEjercicios() {

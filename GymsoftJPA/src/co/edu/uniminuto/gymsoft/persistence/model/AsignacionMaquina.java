@@ -2,6 +2,7 @@ package co.edu.uniminuto.gymsoft.persistence.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -18,6 +19,12 @@ public class AsignacionMaquina implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="idasignacion_maquina")
 	private int idasignacionMaquina;
+
+	@Temporal(TemporalType.DATE)
+	private Date horafin;
+
+	@Temporal(TemporalType.DATE)
+	private Date horaini;
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
@@ -36,6 +43,22 @@ public class AsignacionMaquina implements Serializable {
 
 	public void setIdasignacionMaquina(int idasignacionMaquina) {
 		this.idasignacionMaquina = idasignacionMaquina;
+	}
+
+	public Date getHorafin() {
+		return this.horafin;
+	}
+
+	public void setHorafin(Date horafin) {
+		this.horafin = horafin;
+	}
+
+	public Date getHoraini() {
+		return this.horaini;
+	}
+
+	public void setHoraini(Date horaini) {
+		this.horaini = horaini;
 	}
 
 	public Usuario getUsuario() {

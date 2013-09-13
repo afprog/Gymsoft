@@ -2,6 +2,7 @@ package co.edu.uniminuto.gymsoft.persistence.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -17,6 +18,9 @@ public class Medida implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idMedidas;
+
+	@Temporal(TemporalType.DATE)
+	private Date fecha;
 
 	private double medida;
 
@@ -35,6 +39,14 @@ public class Medida implements Serializable {
 
 	public void setIdMedidas(int idMedidas) {
 		this.idMedidas = idMedidas;
+	}
+
+	public Date getFecha() {
+		return this.fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 	public double getMedida() {
