@@ -7,10 +7,12 @@ import co.edu.uniminuto.gymsoft.persistence.model.Usuario;
 
 public class RegistroUsuarioVo {
 	private Usuario usuario;
+	private UsuarioDAOImpl usuarioDAOImpl;
 
 	public RegistroUsuarioVo(Usuario usuario) {
 		super();
 		this.usuario = usuario;
+		usuarioDAOImpl = new UsuarioDAOImpl();
 	}
 
 	public Usuario getUsuario() {
@@ -22,7 +24,6 @@ public class RegistroUsuarioVo {
 	}
 	
 	public void guardarUsuario(){
-		UsuarioDAOImpl usuarioDAOImpl = new UsuarioDAOImpl();
 		EntityTransaction transaction = usuarioDAOImpl.getDAOManager().getTransaction();
 		transaction.begin();
 		usuarioDAOImpl.save(this.usuario);
