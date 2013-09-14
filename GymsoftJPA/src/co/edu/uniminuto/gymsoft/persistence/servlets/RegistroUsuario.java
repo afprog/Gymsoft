@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.eclipse.persistence.exceptions.DatabaseException;
-
 import co.edu.uniminuto.gymsoft.persistence.model.Usuario;
 import co.edu.uniminuto.gymsoft.persistence.vo.RegistroUsuarioVo;
 
@@ -62,7 +60,7 @@ public class RegistroUsuario extends HttpServlet {
 		registroUsuarioVo = new RegistroUsuarioVo(record);
 		try{
 			registroUsuarioVo.guardarUsuario();
-		}catch(DatabaseException e){
+		}catch(Exception e){
 			e.printStackTrace();
 		}
 		PrintWriter io = response.getWriter();
