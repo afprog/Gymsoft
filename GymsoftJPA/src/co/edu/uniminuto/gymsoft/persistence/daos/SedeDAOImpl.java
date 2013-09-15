@@ -239,6 +239,22 @@ import co.edu.uniminuto.gymsoft.persistence.model.Sede;
 	}
  
  
- 
+	 /**
+	 * @return Sede
+	 * @param: java.lang.Integer IdSede
+	 * Generated on: Thu Sep 12 21:23:18 COT 2013
+	 * @See Sede
+	 */
+		public List<Sede> getSedeById(Integer idSede){
+
+			Query query = getDAOManager().createQuery(" select t from Sede t where t.idSedes IN  ('"+idSede+"') ");
+			List<Sede> results = query.getResultList();
+
+			if (results !=null && results.size() > 0) {
+				return results;
+			}
+
+			return null;
+		}
  
  }
