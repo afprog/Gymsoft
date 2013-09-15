@@ -28,6 +28,7 @@ public class RegistroActividadVo {
 				.getTransaction();
 		transaction.begin();
 		actividadDAOImpl.save(this.actividad);
+		System.out.println("El nuevo id de actividad es: " + this.actividad.getIdActividad());
 		transaction.commit();
 	}
 }

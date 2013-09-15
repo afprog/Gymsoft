@@ -28,5 +28,16 @@ public class RegistroUsuarioVo {
 		usuarioDAOImpl.save(this.usuario);
 		transaction.commit();
 	}
+	
+	/**
+	 * Creado Diego para actualizar deportistas.
+	 */
+	public void actualizarUsuario(){
+	UsuarioDAOImpl usuarioDAOImpl = new UsuarioDAOImpl();
+	EntityTransaction transaction = usuarioDAOImpl.getDAOManager().getTransaction();
+	transaction.begin();
+	usuarioDAOImpl.update(this.usuario);
+	transaction.commit();
+	}
 
 }
