@@ -446,7 +446,7 @@ public class UsuarioDAOImpl extends CustomDAOSupport<Usuario, Long> implements
 	public List<Usuario> getUsuariosPorCedulas(String cedulas) {
 		System.out.println("Las seculas entrantes" + cedulas);
 		Query query = getDAOManager().createQuery(
-				" select t from Usuario t where t.idUsuario IN ('1012352378','1013627731') ");
+				" select t from Usuario t where t.idUsuario IN ("+cedulas+") ");
 
 		List<Usuario> results = query.getResultList();
 
@@ -458,4 +458,24 @@ public class UsuarioDAOImpl extends CustomDAOSupport<Usuario, Long> implements
 
 	}
 
+	
+	
+	/**
+	 * @return Usuario
+	 * @param: java.lang.Integer Idusuario Generated on: Thu Sep 12 21:23:18 COT
+	 *         2013
+	 * @See Usuario
+	 */
+	public List<Usuario> getUsuarioPorCedula(Integer idusuario) {
+
+		Query query = getDAOManager().createQuery(
+				" select t from Usuario t where t.idUsuario IN ('"+idusuario + "')");
+		List<Usuario> results = query.getResultList();
+
+		if (results != null && results.size() > 0) {
+			return results;
+		}
+
+		return null;
+	}
 }

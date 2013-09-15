@@ -29,14 +29,13 @@
 		<table border="1">
 			<thead>
 				<tr>
-					<th colspan="5">ASIGNACION DE MAQUINA A DEPORTISTA</th>
+					<th colspan="4">ASIGNACION DE MAQUINA A DEPORTISTA</th>
 				</tr>
 				<tr>
 					<th>Deportista:</th>
 					<th>Maquina a Asignar:</th>
-					<th>Fecha:</th>
-					<th>Hora Inicio</th>
-					<th>Hora Fin</th>
+					<th>Fecha Inicial</th>
+					<th>Fecha Final</th>
 				</tr>
 			</thead>
 			<tr>
@@ -66,12 +65,11 @@
 							}
 						%>
 				</select></td>
-				<td><input type="date" name="fecha"></td>
-				<td><input type="time" name="horaInicio"></td>
-				<td><input type="time" name="horaFin"></td>
+				<td><input type="datetime-local" name="fecha"></td>
+				<td><input type="datetime-local" name="horaInicio"></td>
 			</tr>
 			<tr>
-			<td colspan="5" align="center">
+			<td colspan="4" align="center">
 			<input type="submit" value="REGISTRAR">
 			</td>
 			</tr>

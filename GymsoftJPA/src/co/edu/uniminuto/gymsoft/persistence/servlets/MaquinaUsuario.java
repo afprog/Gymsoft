@@ -13,11 +13,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.jasper.tagplugins.jstl.core.Out;
-
+import co.edu.uniminuto.gymsoft.persistence.daos.MaquinaDAOImpl;
 import co.edu.uniminuto.gymsoft.persistence.daos.UsuarioDAOImpl;
 import co.edu.uniminuto.gymsoft.persistence.model.AsignacionMaquina;
+import co.edu.uniminuto.gymsoft.persistence.model.Maquina;
 import co.edu.uniminuto.gymsoft.persistence.model.Usuario;
+import co.edu.uniminuto.gymsoft.persistence.vo.RegistroMaquinaUsuarioVo;
 
 /**
  * Servlet implementation class MaquinaUsuario
@@ -25,6 +26,8 @@ import co.edu.uniminuto.gymsoft.persistence.model.Usuario;
 @WebServlet("/MaquinaUsuario")
 public class MaquinaUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	private RegistroMaquinaUsuarioVo registroMaquinaUsuarioVo;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -49,39 +52,49 @@ public class MaquinaUsuario extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
-		PrintWriter print= response.getWriter();
-		print.println(request.getParameter("usuarioSelect"));
-		print.println(request.getParameter("maquinaSelect"));
-		print.println(request.getParameter("fecha"));
-		print.println(request.getParameter("horaInicio"));
-		print.println(request.getParameter("horaFin"));
-		
+
+		PrintWriter print = response.getWriter();
+
 		AsignacionMaquina asignacion = new AsignacionMaquina();
 
-		Usuario escogido = new Usuario();
 		UsuarioDAOImpl usrDaoImpl = new UsuarioDAOImpl();
-		List<Usuario> usuariosDevueltos;
-		usuariosDevueltos = usrDaoImpl.getUsuarioByIdusuario(Integer
-				.parseInt(request.getParameter("usuarioSelect")));
-		asignacion.setUsuario(usuariosDevueltos.get(0));// EL único resultado
-		
-		// Date fecha = null;
-		//
-		// SimpleDateFormat formatoDelTexto = new
-		// SimpleDateFormat("yyyy-MM-dd ");
-		// try {
-		// fecha = formatoDelTexto.parse(request.getParameter("fecha"));
-		// } catch (ParseException e) {
-		// e.printStackTrace();
-		// }
-		//
-		//
-	
-	
-	
-	
-	
-	}
+		MaquinaDAOImpl mqnDaoImpl = new MaquinaDAOImpl();
 
+		List<Usuario> usuariosDevueltos;
+		usuariosDevueltos = usrDaoImpl.getUsuarioPorCedula(Integer
+				.parseInt(request.getParameter("usuarioSelect")));
+
+		List<Maquina> maquinasConsultadas;
+		maquinasConsultadas = mqnDaoImpl.getMaquinaByIdmaquina(Integer
+				.parseInt(request.getParameter("maquinaSelect")));
+
+		// Settea los argumentos para la nueva asignaccion
+		asignacion.setUsuario(usuariosDevueltos.get(0));// EL único resultado
+		asignacion.setMaquina(maquinasConsultadas.get(0));
+
+		// Formatea la fecha que ingresa.
+		Date fechaInicial = null;
+		Date fechaFinal = null;
+		SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		try {
+			fechaInicial = formateador.parse(request.getParameter("fecha")
+					.replaceAll("T", " "));
+			fechaFinal = formateador.parse(request.getParameter("fecha")
+					.replaceAll("T", " "));
+			asignacion.setHoraini(fechaInicial);
+			asignacion.setHorafin(fechaFinal);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			this.registroMaquinaUsuarioVo = new RegistroMaquinaUsuarioVo(
+					asignacion);
+			this.registroMaquinaUsuarioVo.guardarAsignacionActividad();
+			print.println("SE HA REGISTRADO LA ASIGNACION USUARIO - MAQUINA  CON ÉXITO !!");
+		} catch (Exception e) {
+			print.println("HUBO UN PROBLEMA AL INTENTAR GUARDAD LA ASIGNACION");
+		}
+
+	}
 }

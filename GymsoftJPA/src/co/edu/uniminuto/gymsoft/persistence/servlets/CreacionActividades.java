@@ -64,8 +64,6 @@ public class CreacionActividades extends HttpServlet {
 		List<Usuario> listaUsuarios = usuario
 				.getUsuariosPorCedulas(toStringInt(usuarios));
 
-		System.out.println("Usuarios traidos:" + listaUsuarios.size());
-
 		// Trae el objeto Sede seleccionado.
 		List<Sede> sede = new ArrayList<Sede>();
 		sede = sedeDaoImpl.getSedeById(Integer.parseInt(request
@@ -92,11 +90,6 @@ public class CreacionActividades extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		// Busca y settea la Sede escogida.
-		System.out.println("LA fecha es:" + fechaEscogida.toString());
-		System.out.println("las cedulas como parametro: "
-				+ toStringInt(usuarios));
-
 		// Almacenar el registro de la nueva Actividad.
 		try {
 			this.registroAvtividadVo = new RegistroActividadVo(actividad);
@@ -117,9 +110,9 @@ public class CreacionActividades extends HttpServlet {
 		StringBuilder cedulas = new StringBuilder();
 		for (int i = 0; i < identificaciones.length; i++) {
 			if (i == 0) {
-				cedulas.append(identificaciones[i]);
+				cedulas.append("'" + identificaciones[i] + "'");
 			} else {
-				cedulas.append("," + identificaciones[i]);
+				cedulas.append("," +  "'" + identificaciones[i] + "'");
 			}
 		}
 		return cedulas.toString();
