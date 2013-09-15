@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +19,7 @@ import co.edu.uniminuto.gymsoft.persistence.daos.UsuarioDAOImpl;
 import co.edu.uniminuto.gymsoft.persistence.model.Actividad;
 import co.edu.uniminuto.gymsoft.persistence.model.Sede;
 import co.edu.uniminuto.gymsoft.persistence.model.Usuario;
+import co.edu.uniminuto.gymsoft.persistence.vo.RegistroActividadVo;
 
 /**
  * Servlet implementation class CreacionActividades
@@ -27,6 +27,8 @@ import co.edu.uniminuto.gymsoft.persistence.model.Usuario;
 @WebServlet("/CreacionActividades")
 public class CreacionActividades extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
+	private RegistroActividadVo registroAvtividadVo;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -59,15 +61,16 @@ public class CreacionActividades extends HttpServlet {
 
 		// Pasa como parámetro los id´s de los usuarios seleecionados.
 		// Convierte de [] a una lista
-		List<Usuario> listaUsuarios = usuario.getUsuariosPorCedulas(toStringInt(usuarios));
+		List<Usuario> listaUsuarios = usuario
+				.getUsuariosPorCedulas(toStringInt(usuarios));
 
 		System.out.println("Usuarios traidos:" + listaUsuarios.size());
-		
+
 		// Trae el objeto Sede seleccionado.
 		List<Sede> sede = new ArrayList<Sede>();
 		sede = sedeDaoImpl.getSedeById(Integer.parseInt(request
 				.getParameter("sedeSelect")));
-		
+
 		// La nueva actividad a ser insertada.
 		Actividad actividad = new Actividad();
 
@@ -75,9 +78,8 @@ public class CreacionActividades extends HttpServlet {
 		actividad.setTipo(request.getParameter("actividadSelect"));
 		actividad.setLugarFisico(request.getParameter("lugarFisicoSelect"));
 		actividad.setUsuarios(listaUsuarios);
-		actividad.setSede(sede.get(0));//Trae el único encontrado.
-		
-		
+		actividad.setSede(sede.get(0));// Trae el único encontrado.
+
 		// Formatea la fecha que ingresa.
 		Date fechaEscogida = null;
 		SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd HH:mm");
@@ -97,13 +99,20 @@ public class CreacionActividades extends HttpServlet {
 
 		// Almacenar el registro de la nueva Actividad.
 		try {
+			this.registroAvtividadVo = new RegistroActividadVo(actividad);
+			this.registroAvtividadVo.guardarActividad();
+			io.println("<html>");
+			io.println("<h1>Actividad almacenada Exitosamente !!! </h1>");
+			io.println("</html>");
 
 		} catch (Exception e) {
+			io.println("<h1>hubo un problema al insertar la actividad </h1>");
 			e.printStackTrace();
 		}
 
 	}
 
+	/* Formatea un conjunto de datos y forma un Strig */
 	public String toStringInt(String identificaciones[]) {
 		StringBuilder cedulas = new StringBuilder();
 		for (int i = 0; i < identificaciones.length; i++) {
