@@ -26,7 +26,6 @@
 				</tr>
 				<tr>
 					<th>SEDE DE ACTIVIDAD</th>
-					<th>fecha</th>
 				</tr>
 			</thead>
 			<tr>
@@ -36,14 +35,13 @@
 						%>
 						<option value="<%out.print(sd.getIdSedes());%>">
 							<%
-								out.print(sd.getNombre() + "    " + sd.getDireccion());
+								out.print(sd.getNombre() + " ------- " + sd.getDireccion());
 							%>
 						</option>
 						<%
 							}
 						%>
 				</select></td>
-				<td><input type="date" name="hora"></td>
 			</tr>
 			<tr>
 				<td colspan="5" align="center"><input type="submit"
