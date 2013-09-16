@@ -25,17 +25,23 @@
 					<th colspan="5">CONSULTA DE PERFILES POR PARÁMETRO.</th>
 				</tr>
 				<tr>
-					<th>Parametro de Busqueda</th>
-					<th>Patron</th>
+					<th>Buscar por:</th>
+					<th>Criterio de Compración</th>
+					<th>Valor</th>
 				</tr>
 			</thead>
 			<tr>
 				<td><select name="parametroSelect">
 						<option value="ALTURA">ALTURA</option>
-						<option value="PESO">PESO</option>
-						<option value="EDAD">EDAD</option>
+						<option value="PERFIL">PERFIL</option>
+						<option value="GENERO">GENERO</option>
 				</select></td>
-				<td><input type="text" name="parametro"></td>
+				<td><select name="comparacionSelect">
+						<option value="MAYOROIGUAL">MAYOR O IGUAL</option>
+						<option value="MENOROIGUAL">MENOR O IGUAL</option>
+						<option value="IGUALA">IGUAL A</option>
+				</select></td>
+				<td><input type="text" name="valor"></td>
 			</tr>
 			<tr>
 				<td colspan="5" align="center"><input type="submit"

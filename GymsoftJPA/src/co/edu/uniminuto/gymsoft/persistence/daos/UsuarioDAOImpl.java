@@ -444,10 +444,8 @@ public class UsuarioDAOImpl extends CustomDAOSupport<Usuario, Long> implements
 	 * @return
 	 */
 	public List<Usuario> getUsuariosPorCedulas(String cedulas) {
-		System.out.println("Las seculas entrantes" + cedulas);
 		Query query = getDAOManager().createQuery(
 				" select t from Usuario t where t.idUsuario IN ("+cedulas+") ");
-
 		List<Usuario> results = query.getResultList();
 
 		if (results != null && results.size() > 0) {
@@ -478,4 +476,25 @@ public class UsuarioDAOImpl extends CustomDAOSupport<Usuario, Long> implements
 
 		return null;
 	}
+	
+	/**
+	 * Creado por diego para realizar consulta dinámica 
+	 * por parametro y equivalencia.
+	 * @param dinamico
+	 * @return
+	 */
+	public List<Usuario> getUsuariosCamposDinamicos(String campo, String equivalencia, String valor) {
+		
+		String queryString= " select t from Usuario t where t."+campo + " "   + equivalencia + " " + "'"+valor+"'";
+		System.out.println("Query: " + queryString);
+		Query query = getDAOManager().createQuery(queryString);
+		List<Usuario> results = query.getResultList();
+
+		if (results != null && results.size() > 0) {
+			return results;
+		}
+
+		return null;
+	}
+	
 }
