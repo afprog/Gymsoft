@@ -342,6 +342,17 @@ import co.edu.uniminuto.gymsoft.persistence.model.Actividad;
 	}
  
  
+	/**
+	 * 
+	 * @return el ultimo id ingresado.
+	 */
+	public int getIdUltimaActividadRegistrada (){
+		return (Integer)getDAOManager().createQuery("select max(u.idActividad) from Actividad u").getSingleResult();		 
+	}
+	
+	public Actividad getActividadPorId(Integer id){
+		return (Actividad)getDAOManager().createQuery("select a from Actividad a where a.idActividad="+id+"").getSingleResult();
+	}
  
  
  }

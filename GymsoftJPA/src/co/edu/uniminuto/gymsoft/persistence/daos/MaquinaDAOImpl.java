@@ -93,7 +93,7 @@ import co.edu.uniminuto.gymsoft.persistence.model.Maquina;
  */
 	public List<Maquina> getMaquinaByIdmaquina(Integer idmaquina){
 
-		Query query = getDAOManager().createQuery(" select t from Maquina t where t.idmaquina = ?1 ");
+		Query query = getDAOManager().createQuery(" select t from Maquina t where t.idMaquina = ?1 ");
 
 		query.setParameter(1, idmaquina);
 
